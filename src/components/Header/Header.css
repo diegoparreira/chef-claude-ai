@@ -1,0 +1,17 @@
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    height: 80px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+}
+
+.header-logo {
+    width: 50px;
+}
+
+.header-brand {
+    letter-spacing: -5%;
+    font-weight: 400;
+}

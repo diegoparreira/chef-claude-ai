@@ -1,0 +1,25 @@
+import './IngredientsList.css';
+import AIBanner from './AIBanner/AIBanner';
+
+type IngredientsListProps = {
+    ingredients: string[];
+    removeItem: (index: number) => void;
+    handleRecipeShown: () => void;
+}
+
+export default function IngredientsList({ ingredients, removeItem, handleRecipeShown }: IngredientsListProps) {
+
+    const listItems = ingredients.map((item, index) => (
+        <li key={index} className="ingredients-list-item" onClick={() => removeItem(index)}>{item}</li>
+    ));
+
+    return (
+        <section className="ingredients-list-container">
+            <h2 className="ingredients-list-header">Ingredients on hand:</h2>
+            <ul className="ingredients-list">
+                {listItems}
+            </ul>
+            {ingredients.length > 1 ? <AIBanner handleRecipeShown={handleRecipeShown} /> : null}
+        </section>
+    )
+}
