@@ -34,7 +34,7 @@ export default function Main() {
             {ingredients.length > 0 && (
                 <IngredientsList ingredients={ingredients} removeItem={removeIngredient} getRecipeFromAI={getRecipeFromAI} />
             )}
-            {recipe ? <div ref={recipeRef}><Recipe recipe={recipe} /></div> : null}
+            {recipe ? <Recipe recipe={recipe} /> : null}
         </main>
     )
 }

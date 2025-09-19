@@ -3,6 +3,7 @@
     justify-content: center;
     gap: 12px;
     height: 38px;
+    width: 100%;
 }
 
 .input-text {
