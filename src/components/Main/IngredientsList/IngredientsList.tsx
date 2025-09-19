@@ -4,10 +4,10 @@ import AIBanner from './AIBanner/AIBanner';
 type IngredientsListProps = {
     ingredients: string[];
     removeItem: (index: number) => void;
-    handleRecipeShown: () => void;
+    getRecipeFromAI: () => void;
 }
 
-export default function IngredientsList({ ingredients, removeItem, handleRecipeShown }: IngredientsListProps) {
+export default function IngredientsList({ ingredients, removeItem, getRecipeFromAI }: IngredientsListProps) {
 
     const listItems = ingredients.map((item, index) => (
         <li key={index} className="ingredients-list-item" onClick={() => removeItem(index)}>{item}</li>
@@ -19,7 +19,7 @@ export default function IngredientsList({ ingredients, removeItem, handleRecipeS
             <ul className="ingredients-list">
                 {listItems}
             </ul>
-            {ingredients.length > 1 ? <AIBanner handleRecipeShown={handleRecipeShown} /> : null}
+            {ingredients.length > 1 ? <AIBanner getRecipeFromAI={getRecipeFromAI} /> : null}
         </section>
     )
 }

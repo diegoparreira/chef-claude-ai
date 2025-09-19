@@ -3,12 +3,13 @@ import IngredientForm from './IngredientForm/IngredientForm';
 import IngredientsList from './IngredientsList/IngredientsList';
 import './Main.css';
 import Recipe from './Recipe/Recipe';
+import { getRecipeFromMistral } from './Recipe';
 
 export default function Main() {
     const recipeRef = useRef<HTMLDivElement>(null);
 
     const [ingredients, setIngredients] = useState<string[]>([]);
-    const [recipeShown, setRecipeShown] = useState<boolean>(false);
+    const [recipe, setRecipe] = useState<string>('');
 
     function addIngredient(newIngredient: string) {
         setIngredients(prevList => [...prevList, newIngredient]);
@@ -16,10 +17,12 @@ export default function Main() {
 
     function removeIngredient(index: number) {
         setIngredients(prevList => prevList.filter((_, i) => i !== index));
+        setRecipe("");
     }
 
-    function handleRecipeShown() {
-        setRecipeShown(true);
+    async function getRecipeFromAI() {
+        const recipe = await getRecipeFromMistral(ingredients);
+        setRecipe(recipe);
         setTimeout(() => {
             recipeRef.current?.scrollIntoView({ behavior: 'smooth' });
         }, 5)
@@ -29,9 +32,9 @@ export default function Main() {
         <main className="main-container">
             <IngredientForm add={addIngredient} />
             {ingredients.length > 0 && (
-                <IngredientsList ingredients={ingredients} removeItem={removeIngredient} handleRecipeShown={handleRecipeShown} />
+                <IngredientsList ingredients={ingredients} removeItem={removeIngredient} getRecipeFromAI={getRecipeFromAI} />
             )}
-            {recipeShown ? <div ref={recipeRef}><Recipe /></div> : null}
+            {recipe ? <div ref={recipeRef}><Recipe recipe={recipe} /></div> : null}
         </main>
     )
 }
