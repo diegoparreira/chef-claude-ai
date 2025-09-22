@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import './IngredientForm.css';
 
 type IngredientFormProps = {
@@ -5,6 +6,7 @@ type IngredientFormProps = {
 }
 
 export default function IngredientForm({ add }: IngredientFormProps) {
+    const { t } = useTranslation();
 
     function handleSubmit(formData: FormData) {
         const newIngredient: string = String(formData.get('ingredient'));
@@ -12,25 +14,23 @@ export default function IngredientForm({ add }: IngredientFormProps) {
         if (newIngredient) {
             add(newIngredient);
         }
-
-        console.log(`This is the ingredient you have inputed: ${newIngredient}`);
     }
 
     return (
         <form action={(formData) => handleSubmit(formData)} className='add-ingredient-form'>
             <input
-                aria-label='Add ingredient'
+                aria-label={t('addIngredient')}
                 type="text"
                 name="ingredient"
                 id="ingredient"
-                placeholder='e.g. oregano'
+                placeholder={t('ingredientPlaceholder')}
                 className='input-text'
             />
             <button
                 type="submit"
                 className='input-button'
             >
-                Add ingredient
+                {t('addIngredient')}
             </button>
         </form>
     )

@@ -1,5 +1,6 @@
 import './IngredientsList.css';
 import AIBanner from './AIBanner/AIBanner';
+import { t } from 'i18next';
 
 type IngredientsListProps = {
     ingredients: string[];
@@ -15,7 +16,7 @@ export default function IngredientsList({ ingredients, removeItem, getRecipeFrom
 
     return (
         <section className="ingredients-list-container">
-            <h2 className="ingredients-list-header">Ingredients on hand:</h2>
+            <h2 className="ingredients-list-header">{t('ingredientsHeader')}</h2>
             <ul className="ingredients-list">
                 {listItems}
             </ul>
