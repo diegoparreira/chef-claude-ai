@@ -12,9 +12,7 @@ export default function Header() {
                 <img src={logoSrc} alt="Chef Claude Logo" className="header-logo" />
                 <h1 className="header-brand">{t('headerBrand')}</h1>
             </div>
-            <div>
-                <LanguageToggle />
-            </div>
+            <LanguageToggle />
         </header>
     )
 }
