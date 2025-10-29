@@ -13,19 +13,41 @@
 }
 
 .banner-button {
-    background-color: #d17557;
-    border: none;
     border-radius: 6px;
+    border: none;
+    background-color: #d17557;
     color: #fafaf8;
     width: 115px;
     height: 38px;
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: opacity 0.3s ease;
+    position: relative;
 }
 
-.banner-button:hover {
-    background-color: #b85d3f;
-    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
+.banner-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.banner-button.loading::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 50%;
+    left: 50%;
+    margin-left: -6px;
+    margin-top: -6px;
+    border: 2px solid #fafaf8;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .text-header {

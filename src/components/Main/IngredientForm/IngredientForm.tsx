@@ -3,9 +3,10 @@ import './IngredientForm.css';
 
 type IngredientFormProps = {
     add: (ingredient: string) => void;
+    isLoading: boolean;
 }
 
-export default function IngredientForm({ add }: IngredientFormProps) {
+export default function IngredientForm({ add, isLoading }: IngredientFormProps) {
     const { t } = useTranslation();
 
     function handleSubmit(formData: FormData) {
@@ -27,10 +28,11 @@ export default function IngredientForm({ add }: IngredientFormProps) {
                 className='input-text'
             />
             <button
+                disabled={isLoading}
                 type="submit"
-                className='input-button'
+                className={`input-button ${isLoading ? 'loading' : ''}`}
             >
-                {t('addIngredient')}
+                {isLoading ? '' : t('addIngredient')}
             </button>
         </form>
     )

@@ -4,11 +4,12 @@ import { t } from 'i18next';
 
 type IngredientsListProps = {
     ingredients: string[];
+    isLoading: boolean;
     removeItem: (index: number) => void;
     getRecipeFromAI: () => void;
 }
 
-export default function IngredientsList({ ingredients, removeItem, getRecipeFromAI }: IngredientsListProps) {
+export default function IngredientsList({ ingredients, isLoading, removeItem, getRecipeFromAI }: IngredientsListProps) {
 
     const listItems = ingredients.map((item, index) => (
         <li key={index} className="ingredients-list-item" onClick={() => removeItem(index)}>{item}</li>
@@ -20,7 +21,7 @@ export default function IngredientsList({ ingredients, removeItem, getRecipeFrom
             <ul className="ingredients-list">
                 {listItems}
             </ul>
-            {ingredients.length > 1 ? <AIBanner getRecipeFromAI={getRecipeFromAI} /> : null}
+            {ingredients.length > 1 ? <AIBanner isLoading={isLoading} getRecipeFromAI={getRecipeFromAI} /> : null}
         </section>
     )
 }

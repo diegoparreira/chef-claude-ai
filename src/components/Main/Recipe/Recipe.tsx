@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import './Recipe.css';
 import ReactMarkdown from 'react-markdown';
 
@@ -9,7 +10,7 @@ type RecipeProps = {
 export default function Recipe({ ref, recipe }: RecipeProps) {
     return (
         <section ref={ref} className="suggested-recipe-container" >
-            <h2>Chef Claude Recommends:</h2>
+            <h2>{t('aiRecipeHeader')}</h2>
             <article aria-live="polite">
                 <ReactMarkdown>{recipe}</ReactMarkdown>
             </article>
