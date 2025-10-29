@@ -7,6 +7,8 @@ Chef Claude AI is a React + TypeScript single-page application that helps users 
 -   Add ingredients to your list
 -   Remove ingredients with a click
 -   Generate recipes using AI (Mistral model)
+-   **Multi-language support (English/Portuguese)**
+-   **Language switcher with flag indicators**
 -   Responsive, user-friendly interface
 -   Markdown rendering for recipe formatting
 
@@ -74,6 +76,7 @@ npm run lint
 2. Click on an ingredient to remove it.
 3. When you have at least two ingredients, click "Get a recipe" to generate a recipe suggestion.
 4. The recipe will be displayed in markdown format.
+5. **Use the language toggle in the header to switch between English and Portuguese.**
 
 ## Project Structure
 
@@ -81,6 +84,10 @@ npm run lint
 src/
   App.tsx
   main.tsx
+  i18n/
+    index.ts
+  contexts/
+    LanguageContext.tsx
   components/
     Header/
     Main/
@@ -91,6 +98,23 @@ src/
   assets/
 public/
 ```
+
+## Internationalization
+
+The app supports multiple languages using **react-i18next**:
+
+-   **English (🇺🇸)** - Default language
+-   **Portuguese (🇧🇷)** - Brazilian Portuguese
+
+### Supported Languages
+
+Language detection is automatic based on browser settings, with a manual toggle available in the header.
+
+### Adding New Languages
+
+1. Add the language to the `languages` array in `src/contexts/LanguageContext.tsx`
+2. Add translation resources in `src/i18n/index.ts`
+3. The language switcher will automatically include the new language
 
 ## Environment Variables
 
@@ -107,6 +131,9 @@ public/
 -   React Markdown
 -   Vite
 -   TypeScript
+-   **react-i18next** - Internationalization
+-   **i18next** - Translation framework
+-   **i18next-browser-languagedetector** - Language detection
 -   @huggingface/inference
 -   Supabase (via edge function proxy)
 

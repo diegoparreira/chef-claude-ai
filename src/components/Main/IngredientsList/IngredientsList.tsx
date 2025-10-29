@@ -1,13 +1,15 @@
 import './IngredientsList.css';
 import AIBanner from './AIBanner/AIBanner';
+import { t } from 'i18next';
 
 type IngredientsListProps = {
     ingredients: string[];
+    isLoading: boolean;
     removeItem: (index: number) => void;
     getRecipeFromAI: () => void;
 }
 
-export default function IngredientsList({ ingredients, removeItem, getRecipeFromAI }: IngredientsListProps) {
+export default function IngredientsList({ ingredients, isLoading, removeItem, getRecipeFromAI }: IngredientsListProps) {
 
     const listItems = ingredients.map((item, index) => (
         <li key={index} className="ingredients-list-item" onClick={() => removeItem(index)}>{item}</li>
@@ -15,11 +17,11 @@ export default function IngredientsList({ ingredients, removeItem, getRecipeFrom
 
     return (
         <section className="ingredients-list-container">
-            <h2 className="ingredients-list-header">Ingredients on hand:</h2>
+            <h2 className="ingredients-list-header">{t('ingredientsHeader')}</h2>
             <ul className="ingredients-list">
                 {listItems}
             </ul>
-            {ingredients.length > 1 ? <AIBanner getRecipeFromAI={getRecipeFromAI} /> : null}
+            {ingredients.length > 1 ? <AIBanner isLoading={isLoading} getRecipeFromAI={getRecipeFromAI} /> : null}
         </section>
     )
 }
