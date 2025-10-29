@@ -8,7 +8,7 @@ import Spinner from '../Spinner/Spinner';
 import { useTranslation } from 'react-i18next';
 
 export default function Main() {
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
     const recipeRef = useRef<HTMLDivElement>(null);
 
     const [ingredients, setIngredients] = useState<string[]>([]);
@@ -39,9 +39,25 @@ export default function Main() {
 
     async function getRecipeFromAI() {
         setIsLoading(true);
-        const recipe = await getRecipeFromMistral(ingredients);
-        setRecipe(recipe);
-        setIsLoading(false);
+        setRecipe('');
+
+        try {
+            const systemPrompt = t('systemPrompt');
+            const userPrompt = `${t('iHave')} ${t('giveMeARecipe')}`;
+
+            const recipe = await getRecipeFromMistral(ingredients, systemPrompt, userPrompt);
+            setRecipe(recipe);
+        } catch (error) {
+            console.error('Failed to get recipe:', error);
+
+            const errorMessage = error instanceof Error
+                ? error.message
+                : 'Failed to generate recipe. Please try again.';
+
+            setRecipe(`**Error:** ${errorMessage}\n\nPlease try again later.`);
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
