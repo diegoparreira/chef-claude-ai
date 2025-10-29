@@ -41,6 +41,13 @@ export default function Main() {
         setIsLoading(true);
         setRecipe('');
 
+        const timeoutId = setTimeout(() => {
+            if (isLoading) {
+                setIsLoading(false);
+                setRecipe(`**Error:** ${t('apiError')}\n\nRequest timed out after 30 seconds.`);
+            }
+        }, 30000); // 30 seconds
+
         try {
             const systemPrompt = t('systemPrompt');
             const userPrompt = `${t('iHave')} ${t('giveMeARecipe')}`;
@@ -48,6 +55,7 @@ export default function Main() {
             const recipe = await getRecipeFromMistral(ingredients, systemPrompt, userPrompt);
             setRecipe(recipe);
         } catch (error) {
+            clearTimeout(timeoutId);
             console.error('Failed to get recipe:', error);
 
             const errorMessage = error instanceof Error
